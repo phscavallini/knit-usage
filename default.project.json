@@ -1,0 +1,40 @@
+{
+    "name": "rojo-project",
+    "tree": {
+        "$className": "DataModel",
+
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "Source": {
+                "$path": "src/ReplicatedStorage"
+            },
+            "Packages": {
+                "$path": "Packages"
+            }
+        },
+
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+            "Source": {
+                "$path": "src/ServerScriptService" 
+            }
+        },
+
+        "ServerStorage": {
+            "$className": "ServerStorage",
+            "Source": {
+                "$path": "src/ServerStorage" 
+            }
+        },
+
+        "StarterPlayer": {
+            "$className": "StarterPlayer",
+            "StarterCharacterScripts": {
+                "$className": "StarterCharacterScripts", 
+                "Source": {
+                    "$path": "src/StarterPlayerScripts"
+                }
+            }
+        }
+    }
+}
