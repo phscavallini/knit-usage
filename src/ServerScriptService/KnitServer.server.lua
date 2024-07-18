@@ -1,14 +1,31 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ServerStorage = game:GetService("ServerStorage")
+local Players = game:GetService("Players")
+local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 
-local Knit = require(ReplicatedStorage.Packages.Knit)
+-- Create the service:
+local MoneyService = Knit.CreateService {
+    Name = "MoneyService",
+    _PlayerMoney =  {},
+    _DefaultValue = 0
+}
 
-for i, v in pairs(ServerStorage.Source:GetDescendants()) do
-    if v:IsA("ModuleScript") and v.Name:match("Service$") then
-        require(v)
-    end
+-- Add some methods to the service:
+Players.PlayerAdded:Connect(function(player : Player)
+    MoneyService._PlayerMoney[player] = MoneyService:GetMoney(player) or 0
+end)
+
+function MoneyService:GetMoney(player): number
+    -- Do some sort of data fetch
+    return self._PlayerMoney[player]
 end
 
-Knit.Start():andThen(function()
-    print("Knit started")
-end):catch(warn)
+function MoneyService:GiveMoney(player, amount): any
+    -- Do some sort of data fetch
+    local money = self:GetMoney(player)
+    self._PlayerMoney[player] = (money + amount)
+end
+
+function MoneyService.Client:GetMoney(player : Player)
+    return self.Server:GetMoney(player)
+end
+
+Knit.Start():catch(warn)
