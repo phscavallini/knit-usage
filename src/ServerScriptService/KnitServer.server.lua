@@ -4,13 +4,11 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 
 -- knit run
-
-for i, v in pairs(ServerStorage.Source.Services:GetDescendants()) do
-    if v:IsA("ModuleScript") and v.Name:match("Service$") then
-        require(v)
-    end
-end
+local MundialService = require(ServerStorage.Source.Services.MundialService)
 
 Knit.Start():andThen(function()
     print("Knit started")
 end)
+
+MundialService:CriarMundial(100)
+print(MundialService:TemQuantosMundialKrai())
