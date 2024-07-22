@@ -22,11 +22,13 @@ end):catch(warn)
 
 ]]
 
-local logger = function(args)
-    print(args)
-    return true
-end
-
-Knit.Start({ Middleware = { Inbound = { logger } } }):andThen(function()
+Knit.Start({
+    InboundMiddleware = {
+        function(args)
+            print("MIDDLEWARE", args)
+            return true
+        end,
+    }
+}):andThen(function()
     print("Knit started")
 end):catch(warn)
