@@ -3,10 +3,13 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Knit = require(game:GetService("ReplicatedStorage").Packages.Knit)
 
+local addedControllers = {}
+
 for _, v in pairs(ReplicatedStorage.Source:GetDescendants()) do
-    if v:IsA("ModuleScript") and v.Name:match("Controller$") then
-        require(v)
+    if not v:IsA("ModuleScript") or not v.Name:match("Controller$") then
+        continue
     end
+    table.insert(addedControllers, require(v))
 end
 
 --[[

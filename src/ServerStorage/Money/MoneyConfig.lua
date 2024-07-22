@@ -1,3 +1,0 @@
-return {
-    StartingMoney = 10
-}
